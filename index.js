@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import update from './src/update.js';
 
 const app = new PIXI.Application({ backgroundColor: 0x1099bb });
 document.body.appendChild(app.view);
@@ -16,7 +17,9 @@ function setup(loader, resources) {
 
     app.stage.addChild(bunny);
 
-    app.ticker.add((delta) => {
-        bunny.rotation += 0.1 * delta;
+    let state = {bunny};
+
+    app.ticker.add((dt) => {
+        update(dt, state);
     });
 }
