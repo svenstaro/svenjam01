@@ -5,7 +5,7 @@ svenjam01 repo
 ### Installation
 
 Required packages:
-- yarn
+- yarn 
 
 
 Then just type:
