@@ -1,3 +1,5 @@
 export default function update(dt, state) {
-    state.bunny.rotation += 3333 * dt;
+    for (let [key, entity] of Object.entries(state)) {
+        entity.update(dt);
+    }
 }
