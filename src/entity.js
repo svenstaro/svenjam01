@@ -9,7 +9,6 @@ export default class Entity {
     }
 
     update_position() {
-        console.log(this.body);
         this.sprite.x = this.body.position.x;
         this.sprite.y = this.body.position.y;
     }
