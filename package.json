@@ -12,6 +12,7 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "pixi.js": "^5.1.5"
+    "pixi.js": "^5.1.5",
+    "vigur": "^0.1.1"
   }
 }
