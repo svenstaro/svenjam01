@@ -12,10 +12,15 @@ document.body.appendChild(app.view);
 
 // Load static files into app.
 const staticFiles = {
-  "./levels/level1.tmx": require("./levels/level1.tmx"),
+  "levels/level1.xml": require("./levels/level1.xml"),
+  "levels/industrial.v2.xml": require("./levels/industrial.v2.xml"),
+  "levels/character.xml": require("./levels/character.xml"),
 };
 tmx.readFile = (filename, callback) => {
-  console.log(`Trying to log ${filename}`);
+  if (typeof staticFiles[filename] === "undefined") {
+    console.error(`Missing resource ${filename}`);
+    throw `Missing resource ${filename}`;
+  }
   fetch(staticFiles[filename]).then(response => {
     const result = response.text().then(text => {
       callback(undefined, text);
@@ -23,7 +28,7 @@ tmx.readFile = (filename, callback) => {
   });
 };
 
-tmx.parseFile("./levels/level1.tmx", (err, map) => {
+tmx.parseFile("levels/level1.xml", (err, map) => {
   if (err) throw err;
   console.log(map);
 });
