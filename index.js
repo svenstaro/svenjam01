@@ -21,6 +21,7 @@ document.body.appendChild(app.view);
 
 PIXI.Loader.shared
     .add('pika', require('./img/pikachu.png'))
+    .add('tileset', require("./img/0x72_16x16RobotTileset.v1.png"))
     .load(setup);
 
 function setup(loader, resources) {
@@ -55,4 +56,15 @@ function create_entities(resources) {
 function load_level(level) {
     console.log(level);
     app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
+    const atlas = PIXI.BaseTexture.from('tileset');
+    // render background layer
+    for (let i = 0; i < level.layers[1].data; i++) {
+	let line = i % level.width;
+	let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(Math.ceil(float(data[i]) / 100.0), data[i] % 100, 16, 16));
+	let current_sprite = new PIXI.Sprite(current_texture);
+	current_sprite.position.x = i * 16;
+	current_sprite.position.y = (i % 16) * 16;
+
+        app.stage.addChild(current_sprite);
+    }
 }
