@@ -22,8 +22,8 @@ import keyboard from './src/events/keyboard';
 
 window.app = new PIXI.Application({
     backgroundColor: 0x1099bb,
-    width: 1700,
-    height: 1700
+    width: 800,
+    height: 600
 });
 
 window.engine = Matter.Engine.create();
@@ -44,8 +44,8 @@ function setup(loader, resources) {
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
         update(dt, state);
-        // app.stage.x = lerp(app.stage.x, app.renderer.width/2 - player.sprite.x, 0.1 * dt);
-        // app.stage.y = lerp(app.stage.y, app.renderer.height/2 - player.sprite.y, 0.1 * dt);
+        app.stage.x = lerp(app.stage.x, app.renderer.width/2 - player.sprite.x, 0.1 * dt);
+        app.stage.y = lerp(app.stage.y, app.renderer.height/2 - player.sprite.y, 0.1 * dt);
     });
 
     load_level(level1);
@@ -82,6 +82,8 @@ function create_entities(resources) {
 function load_level(level) {
     app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
     const atlas = PIXI.BaseTexture.from('tileset');
+    const atlas_width = 32
+    const atlas_height = 32
 
     console.log(level);
     for (let j = 0; j < level.layers.length; j++) {
@@ -89,19 +91,18 @@ function load_level(level) {
         if (level.layers[j].name === "Game Objects") {
             continue;
         }
-
         for (let i = 0; i < level.layers[j].data.length; i++) {
-            let data = level.layers[1].data;
+            let data = level.layers[j].data;
             if (data[i] === 0) {
                 continue;
             }
             let extracted_data = get_flipping_and_id(data[i]);
             let atlas_id = extracted_data.global_id - 1;
 
-            const atlas_row = Math.floor(atlas_id / level.width);
-            const atlas_col = atlas_id % level.height;
+            const atlas_row = Math.floor(parseFloat(atlas_id) / parseFloat(atlas_width));
+            const atlas_col = atlas_id % atlas_width
 
-            let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(atlas_row, atlas_col, 16, 16));
+            let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(atlas_col*16, atlas_row*16, 16, 16));
             let current_sprite = new PIXI.Sprite(current_texture);
 
             const canvas_position_x = (i * 16) % (level.width * 16);
