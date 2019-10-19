@@ -53,9 +53,7 @@ export default class Player {
         this.current_sprite_name = animationName;
         this.sprite = this.sprites[animationName];
         this.stage.addChild(this.sprite);
-        this.sprite.anchor.set(0.5);
         this.sprite.play();
-        this.stage.addChild(this.sprite);
     }
 
     update(dt) {
