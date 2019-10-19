@@ -66,7 +66,7 @@ function create_entities(resources) {
 
     let zone = new PhysicsZone(600, 250, 500, 600, 'antigravity');
 
-    let gameObjects = [new Box(200, 200, 50, 50)];
+    let gameObjects = getGameObjects(level1);
     let gameObjectBodies = Object.values(gameObjects).map(obj => obj.body);
     Object.values(gameObjects).forEach(obj => app.stage.addChild(obj.sprite));
 
