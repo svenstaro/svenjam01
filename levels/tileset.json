@@ -10,6 +10,31 @@
  "tileheight":16,
  "tiles":[
         {
+         "id":0,
+         "objectgroup":
+            {
+             "draworder":"index",
+             "name":"",
+             "objects":[
+                    {
+                     "height":16,
+                     "id":1,
+                     "name":"",
+                     "rotation":0,
+                     "type":"",
+                     "visible":true,
+                     "width":16,
+                     "x":0,
+                     "y":0
+                    }],
+             "opacity":1,
+             "type":"objectgroup",
+             "visible":true,
+             "x":0,
+             "y":0
+            }
+        }, 
+        {
          "id":32,
          "objectgroup":
             {
@@ -581,6 +606,46 @@
              "x":0,
              "y":0
             }
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":250,
+                 "tileid":365
+                }, 
+                {
+                 "duration":250,
+                 "tileid":366
+                }, 
+                {
+                 "duration":250,
+                 "tileid":367
+                }, 
+                {
+                 "duration":250,
+                 "tileid":368
+                }],
+         "id":364
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":250,
+                 "tileid":397
+                }, 
+                {
+                 "duration":250,
+                 "tileid":398
+                }, 
+                {
+                 "duration":250,
+                 "tileid":399
+                }, 
+                {
+                 "duration":250,
+                 "tileid":400
+                }],
+         "id":396
         }],
  "tilewidth":16,
  "type":"tileset",
