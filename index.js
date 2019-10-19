@@ -37,6 +37,10 @@ PIXI.Loader.shared
     .add('tileset', require("./img/0x72_16x16RobotTileset.v1.png"))
     .load(setup);
 
+window.addEventListener("resize", function() {
+  app.renderer.resize(window.innerWidth, window.innerHeight);
+});
+
 function setup(loader, resources) {
     keyboard.init();
     let state = create_entities(resources);
