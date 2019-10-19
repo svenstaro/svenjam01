@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
 import level1 from './levels/level1.json';
+import lerp from 'lerp';
 
 import PhysicsZone from './src/physics_zone';
 import update from './src/update';
@@ -32,8 +33,8 @@ function setup(loader, resources) {
     app.ticker.add((dt) => {
         Engine.update(engine, 1000/60 * dt);
         update(dt, state);
-        app.stage.x = app.renderer.width/2 - state.player.sprite.x;
-        app.stage.y = app.renderer.height/2 - state.player.sprite.y;
+        app.stage.x = lerp(app.stage.x, app.renderer.width/2 - state.player.sprite.x, 0.1 * dt);
+        app.stage.y = lerp(app.stage.y, app.renderer.height/2 - state.player.sprite.y, 0.1 * dt);
     });
 
     load_level(level1);
