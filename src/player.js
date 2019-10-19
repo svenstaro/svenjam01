@@ -5,17 +5,17 @@ import key from './key';
 
 export default class Player {
     constructor(texture) {
-        let pikachu_main_body = Matter.Bodies.rectangle(0, 0, 50, 60);
+        let player_body = Matter.Bodies.rectangle(0, 0, 50, 60);
         this.groundSensor = Matter.Bodies.rectangle(0, 25, 50, 20, {
             sleepThreshold: Infinity,
             isSensor: true,
         });
 
         this.body = Matter.Body.create({
-            parts: [pikachu_main_body, this.groundSensor],
+            parts: [player_body, this.groundSensor],
             inertia: Infinity,
-            friction: 0.002,
-            frictionAir: 0.002,
+            friction: 0.001,
+            frictionAir: 0.0005,
             restitution: 0,
             label: 'player',
         });
@@ -36,7 +36,12 @@ export default class Player {
         } else if (keyboard.isPressed(key.D)) {
             this.body.force.x = 0.005 * dt;
         }  else {
-            this.body.force.x = 0;
+            if (this.body.velocity.y == 0 &&
+                this.body.velocity.x != 0 &&
+                Math.abs(this.body.velocity.x) > 0.7
+            ) {
+                this.body.force.x = Math.sign(this.body.velocity.x) * -0.01 * dt
+            }
         }
 
         if (keyboard.isPressed(key.W) && this.onGround) {
