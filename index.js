@@ -5,6 +5,8 @@ import lerp from 'lerp';
 import {load_level} from './src/map';
 import { TILE_ATLAS, loadAnimation } from "./src/animations.js";
 import { CRTFilter } from 'pixi-filters';
+import decomp from 'poly-decomp';
+window.decomp = decomp;
 
 import Box from './src/entities/box';
 

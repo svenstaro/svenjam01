@@ -88,9 +88,6 @@ export function load_level(level) {
 
 
 function create_static_body(atlas_id, pos_x, pos_y) {
-    //    console.log("Id and map");
-    //    console.log(atlas_id);
-    //    console.log(TILES_MAP);
     let tile = TILES_MAP[atlas_id];
     // Ignore this for now. Debug lol
     if (tile === undefined) {
@@ -102,13 +99,10 @@ function create_static_body(atlas_id, pos_x, pos_y) {
     }
     let objects = tile.objectgroup.objects;
 
-    //    console.log("tile and objects");
-    //    console.log(tile);
-    //    console.log(objects);
     // There can be multiple objects per tile (we usually have one)
     for (const object of objects) {
         // We got a simple box object
-        if (object.polygon !== undefined) {
+        if (object.polygon === undefined) {
             // Calculate physic body offset to tile
             let position_x = pos_x + object.x;
             let position_y = pos_y + object.y;
@@ -118,29 +112,24 @@ function create_static_body(atlas_id, pos_x, pos_y) {
                 position_y,
                 object.width,
                 object.height,
-            {
-                isStatic: true,
-                label: 'ground',
-            });
-            //            console.log("Create body")
-            //            console.log(position_x, position_y)
-            //            console.log(object.height, object.width)
+                {
+                    isStatic: true,
+                    label: 'ground',
+                }
+            );
             World.add(engine.world, [body]);
 
         } else {
             // Rectangle for everything else for debugging
-            let body = Matter.Bodies.rectangle(
+            let body = Matter.Bodies.fromVertices(
                 pos_x,
                 pos_y,
-                16,
-                16,
-            {
-                isStatic: true,
-                label: 'ground',
-            });
-            //            console.log("Create body")
-            //            console.log(pos_x, pos_y)
-            //            console.log(object.height, object.width)
+                object.polygon,
+                {
+                    isStatic: true,
+                    label: 'ground',
+                }
+            );
             World.add(engine.world, [body]);
         }
     }
