@@ -51,19 +51,8 @@ function setup(loader, resources) {
 }
 
 function create_entities(resources) {
-    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, {
-        isStatic: true,
-        label: 'ground',
-    });
-    let ground_rect = new PIXI.Graphics();
-    ground_rect.beginFill(0xFFFFFF);
-    ground_rect.drawRect(0, 380 - 60 / 2, 600, 60);
-    ground_rect.endFill();
-
     // Rendering is inside player.
     window.player = new Player(app.stage, resources.tileset.texture, getSpawn(level1));
-
-    app.stage.addChild(ground_rect);
 
     let zone = new PhysicsZone(600, 250, 500, 600, 'antigravity');
 
@@ -72,7 +61,7 @@ function create_entities(resources) {
     Object.values(gameObjects).forEach(obj => app.stage.addChild(obj.sprite));
 
     World.add(engine.world, [
-        player.body, ground_body, zone.body,
+        player.body, zone.body,
         ...gameObjectBodies
     ]);
 
