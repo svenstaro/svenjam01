@@ -17,9 +17,10 @@ export default class Player {
             friction: 0.002,
             frictionAir: 0.002,
             restitution: 0,
+            label: 'player',
         });
 
-        Matter.Body.setPosition(this.body, Matter.Vector.create(200, 100));
+        this.reset();
 
         this.sprite = new PIXI.Sprite(texture);
         this.sprite.anchor.set(0.5);
@@ -42,6 +43,10 @@ export default class Player {
             this.body.force.y = -0.055 * dt;
         }
 
+        if (this.body.position.y > 2000) {
+            this.reset();
+        }
+
         this.update_position();
     }
 
@@ -49,5 +54,10 @@ export default class Player {
         this.sprite.x = this.body.position.x;
         this.sprite.y = this.body.position.y;
         this.sprite.rotation = this.body.angle;
+    }
+
+    reset() {
+        Matter.Body.setPosition(this.body, Matter.Vector.create(200, 100));
+        Matter.Body.setVelocity(this.body, Matter.Vector.create(0, 0));
     }
 }

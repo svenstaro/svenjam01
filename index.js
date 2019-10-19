@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
 import level1 from './levels/level1.json';
 
+import PhysicsZone from './src/physics_zone';
 import update from './src/update';
 import Body from './src/body';
 import Player from './src/player';
@@ -39,20 +40,26 @@ function setup(loader, resources) {
 }
 
 function create_entities(resources) {
-    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, { isStatic: true });
+    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, {
+        isStatic: true,
+        label: 'ground',
+    });
     let ground_rect = new PIXI.Graphics();
     ground_rect.beginFill(0xFFFFFF);
     ground_rect.drawRect(0, 380 - 60/2, 600, 60);
     ground_rect.endFill();
+
     let pika = new Player(resources.pika.texture);
     app.stage.addChild(pika.sprite);
     app.stage.addChild(ground_rect);
-    World.add(engine.world, [pika.body, ground_body]);
 
-    return {player: pika};
+    let zone = new PhysicsZone(600, 250, 500, 600, 'antigravity');
+
+    World.add(engine.world, [pika.body, ground_body, zone.body]);
+
+    return {player: pika, zone};
 }
 
 function load_level(level) {
-    console.log(level);
     app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
 }
