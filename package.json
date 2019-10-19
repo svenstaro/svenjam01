@@ -14,6 +14,7 @@
   "dependencies": {
     "lerp": "^1.0.3",
     "matter-js": "^0.14.2",
+    "pixi-filters": "^3.0.3",
     "pixi.js": "^5.1.5",
     "vigur": "^0.1.1"
   }
