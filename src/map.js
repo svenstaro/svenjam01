@@ -89,7 +89,12 @@ export function load_level(level) {
 
             /// Create static physics objects for foreground tiles
             if (layer.name === "Foreground Tiles") {
-                create_static_body(atlas_id, canvas_position_x, canvas_position_y);
+                create_static_body(
+                    atlas_id,
+                    extracted_data,
+                    canvas_position_x,
+                    canvas_position_y
+                );
             }
         }
     }
@@ -98,7 +103,7 @@ export function load_level(level) {
 }
 
 
-function create_static_body(atlas_id, pos_x, pos_y) {
+function create_static_body(atlas_id, flip_info, pos_x, pos_y) {
     let tile = TILES_MAP[atlas_id];
     // Ignore this for now. Debug lol
     if (tile === undefined) {
@@ -118,6 +123,17 @@ function create_static_body(atlas_id, pos_x, pos_y) {
             let position_x = pos_x + object.x;
             let position_y = pos_y + object.y;
 
+            // Flip horizontally
+            // If we need to flip diagonally we need to flip both ways
+            if (flip_info.vertical || flip_info.diagonal) {
+                position_x = 16 - position_x + object.width;
+            }
+            // Flip diagonally
+            // If we need to flip diagonally we need to flip both ways
+            if (flip_info.horizontal || flip_info.diagonal) {
+                position_y = 16 - position_y + object.height;
+            }
+
             let body = Matter.Bodies.rectangle(
                 position_x,
                 position_y,
@@ -131,6 +147,17 @@ function create_static_body(atlas_id, pos_x, pos_y) {
             World.add(engine.world, [body]);
 
         } else {
+            let vertices = object.polygon;
+            if (flip_info.vertical || flip_info.diagonal) {
+                for (vertex of vertices) {
+                    vertex.x = -vertex.x - 16;
+                }
+            }
+            if (flip_info.horizontal || flip_info.diagonal) {
+                for (vertex of vertices) {
+                    vertex.y = -vertex.y - 16;
+                }
+            }
             // Rectangle for everything else for debugging
             let body = Matter.Bodies.fromVertices(
                 pos_x,
@@ -143,6 +170,7 @@ function create_static_body(atlas_id, pos_x, pos_y) {
             );
             World.add(engine.world, [body]);
         }
+
     }
 }
 
