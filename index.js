@@ -161,9 +161,9 @@ function create_static_body(atlas_id, pos_x, pos_y) {
                 isStatic: true,
                 label: 'ground',
             });
-            console.log("Create body")
-            console.log(position_x, position_y)
-            console.log(object.height, object.width)
+            //            console.log("Create body")
+            //            console.log(position_x, position_y)
+            //            console.log(object.height, object.width)
             World.add(engine.world, [body]);
 
         } else {
@@ -177,9 +177,9 @@ function create_static_body(atlas_id, pos_x, pos_y) {
                 isStatic: true,
                 label: 'ground',
             });
-            console.log("Create body")
-            console.log(pos_x, pos_y)
-            console.log(object.height, object.width)
+            //            console.log("Create body")
+            //            console.log(pos_x, pos_y)
+            //            console.log(object.height, object.width)
             World.add(engine.world, [body]);
         }
     }
