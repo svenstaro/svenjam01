@@ -15,7 +15,7 @@ export default class Player {
             parts: [player_body, this.groundSensor],
             inertia: Infinity,
             friction: 0.001,
-            frictionAir: 0.0005,
+            frictionAir: 1.0005,
             restitution: 0,
             label: 'player',
         });

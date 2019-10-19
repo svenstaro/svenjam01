@@ -73,27 +73,55 @@ function create_entities(resources) {
 function load_level(level) {
     app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
     const atlas = PIXI.BaseTexture.from('tileset');
+
     // render background layer
     for (let i = 0; i < level.layers[1].data.length; i++) {
         let data = level.layers[1].data;
-        if (data[i]) {
-            console.log(i);
-        }
-        let line = i % level.width;
-        let row = Math.ceil(parseFloat(data[i]) / 100.0);
-        let col = data[i] % 100;
+
+        let extracted_data = get_flipping_and_id(data[i]);
+        let id = extracted_data.global_id;
+
+        const line = i % level.width;
+        const row = Math.floor(i / level.width);
+        const col = i % level.height;
+
         let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(row, col, 16, 16));
         let current_sprite = new PIXI.Sprite(current_texture);
+
         // console.log('line', line);
         // console.log('row', row);
         // console.log('col', col);
         // console.log('pos x', canvas_position_x);
         // console.log('pos y', canvas_position_y);
-        const canvas_position_x = (i * 16)%(100*16);
+
+        const canvas_position_x = (i * 16) % (level.width * 16);
         const canvas_position_y = (i % 16) * 16;
+
         current_sprite.position.x = canvas_position_x;
         current_sprite.position.y = canvas_position_y;
 
         app.stage.addChild(current_sprite);
+    }
+}
+
+
+function get_flipping_and_id(id) {
+    let horizontal_bit = 0b10000000000000000000000000000000;
+    let vertical_bit = 0b01000000000000000000000000000000;
+    let diagonal_bit = 0b00100000000000000000000000000000;
+
+    let clean_bits = 0b00011111111111111111111111111111;
+
+    let horizontal = (horizontal & id) == horizontal;
+    let vertical = (vertical_bit & id) == vertical_bit;
+    let diagonal = (diagonal_bit & id) == diagonal_bit;
+
+    let normalized_id = clean_bits & id;
+
+    return {
+        horizontal: horizontal,
+        vertical: vertical,
+        diagonal: diagonal,
+        global_id: normalized_id,
     }
 }
