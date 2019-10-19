@@ -21,10 +21,10 @@ import Player from './src/entities/player';
 // Event handling
 import keyboard from './src/events/keyboard';
 
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 window.app = new PIXI.Application({
-    backgroundColor: 0x1099bb,
     width: 800,
-    height: 600
+    height: 600,
 });
 
 window.engine = Matter.Engine.create();
@@ -33,7 +33,6 @@ const World = Matter.World;
 document.body.appendChild(app.view);
 
 PIXI.Loader.shared
-    .add('pika', require('./img/pikachu.png'))
     .add('tileset', require("./img/0x72_16x16RobotTileset.v1.png"))
     .load(setup);
 
@@ -42,11 +41,13 @@ function setup(loader, resources) {
     let state = create_entities(resources);
     collisions(engine, state);
 
+    app.stage.scale = {x: 4, y: 4};
+
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
         update(dt, state);
-        app.stage.x = lerp(app.stage.x, app.renderer.width/2 - player.sprite.x, 0.1 * dt);
-        app.stage.y = lerp(app.stage.y, app.renderer.height/2 - player.sprite.y, 0.1 * dt);
+        app.stage.x = lerp(app.stage.x, app.renderer.width / 2 - player.sprite.x * 4, 0.1 * dt);
+        app.stage.y = lerp(app.stage.y, app.renderer.height / 2 - player.sprite.y * 4, 0.1 * dt);
     });
 
     load_level(level1);
@@ -56,19 +57,8 @@ function create_entities(resources) {
     // Register the tileset for animations.
     setAnimationTilesetTexture(resources.tileset.texture);
 
-    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, {
-        isStatic: true,
-        label: 'ground',
-    });
-    let ground_rect = new PIXI.Graphics();
-    ground_rect.beginFill(0xFFFFFF);
-    ground_rect.drawRect(0, 380 - 60 / 2, 600, 60);
-    ground_rect.endFill();
-
     // Rendering is inside player.
     window.player = new Player(app.stage, getSpawn(level1));
-
-    app.stage.addChild(ground_rect);
 
     let zone = new PhysicsZone(600, 250, 500, 600, 'antigravity');
 
@@ -77,7 +67,7 @@ function create_entities(resources) {
     Object.values(gameObjects).forEach(obj => app.stage.addChild(obj.sprite));
 
     World.add(engine.world, [
-        player.body, ground_body, zone.body,
+        player.body, zone.body,
         ...gameObjectBodies
     ]);
 
@@ -90,7 +80,6 @@ function load_level(level) {
     const atlas_width = 32
     const atlas_height = 32
 
-    console.log(level);
     for (let j = 0; j < level.layers.length; j++) {
 
         if (level.layers[j].name === "Game Objects") {
@@ -119,20 +108,7 @@ function load_level(level) {
             app.stage.addChild(current_sprite);
         }
     }
-    let first_sprite = new PIXI.Graphics();
-    first_sprite.beginFill(0xFF0000);
-    first_sprite.drawRect(0, 0, 16, 16);
-    first_sprite.endFill();
-
-    app.stage.addChild(first_sprite);
-    let last_sprite = new PIXI.Graphics();
-    last_sprite.beginFill(0xFF0000);
-    last_sprite.drawRect(1600, 1600, 16, 16);
-    last_sprite.endFill();
-
-    app.stage.addChild(last_sprite);
 }
-
 
 function get_flipping_and_id(id) {
     let horizontal_bit = 0b10000000000000000000000000000000;
