@@ -32,7 +32,6 @@ const World = Matter.World;
 document.body.appendChild(app.view);
 
 PIXI.Loader.shared
-    .add('pika', require('./img/pikachu.png'))
     .add('tileset', require("./img/0x72_16x16RobotTileset.v1.png"))
     .load(setup);
 
