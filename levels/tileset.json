@@ -2342,7 +2342,8 @@
                  "duration":250,
                  "tileid":368
                 }],
-         "id":364
+         "id":364,
+         "type":"bot1_idle_top"
         }, 
         {
          "animation":[
@@ -2362,7 +2363,8 @@
                  "duration":250,
                  "tileid":400
                 }],
-         "id":396
+         "id":396,
+         "type":"bot1_idle_bot"
         }, 
         {
          "id":423,
@@ -2415,6 +2417,23 @@
             }
         }, 
         {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":525
+                }, 
+                {
+                 "duration":50,
+                 "tileid":526
+                }, 
+                {
+                 "duration":50,
+                 "tileid":527
+                }, 
+                {
+                 "duration":50,
+                 "tileid":528
+                }],
          "id":425,
          "objectgroup":
             {
@@ -2474,6 +2493,64 @@
         {
          "animation":[
                 {
+                 "duration":250,
+                 "tileid":493
+                }, 
+                {
+                 "duration":250,
+                 "tileid":494
+                }, 
+                {
+                 "duration":250,
+                 "tileid":495
+                }, 
+                {
+                 "duration":250,
+                 "tileid":496
+                }],
+         "id":492,
+         "type":"player_idle_top"
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":498
+                }, 
+                {
+                 "duration":50,
+                 "tileid":499
+                }, 
+                {
+                 "duration":50,
+                 "tileid":500
+                }, 
+                {
+                 "duration":50,
+                 "tileid":501
+                }, 
+                {
+                 "duration":50,
+                 "tileid":502
+                }, 
+                {
+                 "duration":50,
+                 "tileid":503
+                }, 
+                {
+                 "duration":50,
+                 "tileid":504
+                }, 
+                {
+                 "duration":50,
+                 "tileid":505
+                }],
+         "id":497,
+         "type":"player_run_top"
+        }, 
+        {
+         "animation":[
+                {
                  "duration":50,
                  "tileid":515
                 }, 
@@ -2502,6 +2579,64 @@
                  "tileid":514
                 }],
          "id":519
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":250,
+                 "tileid":525
+                }, 
+                {
+                 "duration":250,
+                 "tileid":526
+                }, 
+                {
+                 "duration":250,
+                 "tileid":527
+                }, 
+                {
+                 "duration":250,
+                 "tileid":528
+                }],
+         "id":524,
+         "type":"player_idle_bot"
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":530
+                }, 
+                {
+                 "duration":50,
+                 "tileid":531
+                }, 
+                {
+                 "duration":50,
+                 "tileid":532
+                }, 
+                {
+                 "duration":50,
+                 "tileid":533
+                }, 
+                {
+                 "duration":50,
+                 "tileid":534
+                }, 
+                {
+                 "duration":50,
+                 "tileid":535
+                }, 
+                {
+                 "duration":50,
+                 "tileid":536
+                }, 
+                {
+                 "duration":50,
+                 "tileid":537
+                }],
+         "id":529,
+         "type":"player_run_bot"
         }],
  "tilewidth":16,
  "type":"tileset",
