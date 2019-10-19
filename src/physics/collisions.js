@@ -1,5 +1,5 @@
 import * as Matter from 'matter-js';
-import PhysicsZone from './physics_zone';
+import PhysicsZone from './zone';
 
 function updatePlayerGroundStatus(event, player, status) {
     for (let pair of event.pairs) {

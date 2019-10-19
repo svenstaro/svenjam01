@@ -1,7 +1,7 @@
 import * as Matter from 'matter-js';
 import * as PIXI from 'pixi.js';
-import keyboard from './keyboard';
-import key from './key';
+import keyboard from '../events/keyboard';
+import key from '../events/key';
 
 export default class Player {
     constructor(texture, spawn) {

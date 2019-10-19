@@ -3,13 +3,20 @@ import * as Matter from 'matter-js';
 import level1 from './levels/level1.json';
 import lerp from 'lerp';
 
-import PhysicsZone from './src/physics_zone';
-import update from './src/update';
-import Body from './src/body';
-import Player from './src/player';
-import keyboard from './src/keyboard';
-import collisions from './src/collisions';
+// Base stuff
 import {getSpawn} from './src/map';
+import update from './src/update';
+
+// Physics
+import Body from './src/physics/body';
+import PhysicsZone from './src/physics/zone';
+import collisions from './src/physics/collisions';
+
+// Entities
+import Player from './src/entities/player';
+
+// Event handling
+import keyboard from './src/events/keyboard';
 
 const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
