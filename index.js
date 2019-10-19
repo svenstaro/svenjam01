@@ -30,6 +30,7 @@ window.app = new PIXI.Application({
 window.engine = Matter.Engine.create();
 const Engine = Matter.Engine;
 const World = Matter.World;
+const Render = Matter.Render;
 document.body.appendChild(app.view);
 
 PIXI.Loader.shared
@@ -60,6 +61,13 @@ function setup(loader, resources) {
     });
 
     load_level(level1);
+
+    // Create and run the renderer
+    var render = Render.create({
+        element: document.body,
+        engine: engine
+    });
+    Render.run(render);
 }
 
 function create_entities(resources) {
