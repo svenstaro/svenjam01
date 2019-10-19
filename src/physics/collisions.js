@@ -24,11 +24,11 @@ function dispatchToPhysicsZones(event, method) {
 export default function setupCollisionEvents(engine, state) {
     Matter.Events.on(engine, 'collisionStart', (event) => {
         dispatchToPhysicsZones(event, 'onCollisionEnter');
-        updatePlayerGroundStatus(event, state.player, true);
+        updatePlayerGroundStatus(event, player, true);
     });
 
     Matter.Events.on(engine, 'collisionEnd', (event) => {
         dispatchToPhysicsZones(event, 'onCollisionExit');
-        updatePlayerGroundStatus(event, state.player, false);
+        updatePlayerGroundStatus(event, player, false);
     });
 }
