@@ -18,7 +18,7 @@ import Player from './src/entities/player';
 // Event handling
 import keyboard from './src/events/keyboard';
 
-const app = new PIXI.Application({
+window.app = new PIXI.Application({
     backgroundColor: 0x1099bb,
     width: 600,
     height: 600

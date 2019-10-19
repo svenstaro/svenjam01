@@ -1,7 +1,9 @@
 import * as Matter from 'matter-js';
 import PhysicsZone from './zone';
+import dispatchParticles from '../particle.js';
 
 function updatePlayerGroundStatus(event, player, status) {
+    let oldOnGround = player.onGround;
     for (let pair of event.pairs) {
         if (pair.bodyA === player.groundSensor) {
             player.onGround = status;
@@ -9,6 +11,7 @@ function updatePlayerGroundStatus(event, player, status) {
             player.onGround = status;
         }
     }
+    if (player.onGround && !oldOnGround) dispatchParticles(player)
 }
 
 function dispatchToPhysicsZones(event, method) {
