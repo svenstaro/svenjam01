@@ -94,7 +94,7 @@ export default class Player {
 
     update_position() {
         const body = this.body;
-        this.sprite.x = body.position.x;
+        this.sprite.x = body.position.x + 5;
         this.sprite.y = body.position.y - 2;
         this.sprite.rotation = body.angle;
     }
