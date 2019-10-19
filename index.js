@@ -28,16 +28,16 @@ function setup(loader, resources) {
     collisions(engine, state);
 
     app.ticker.add((dt) => {
-        Engine.update(engine, 1000/60);
+        Engine.update(engine, 1000/60 * dt);
         update(dt, state);
     });
 }
 
 function create_entities(resources) {
-    let ground_body = Matter.Bodies.rectangle(0, 380, 810, 60, { isStatic: true });
+    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, { isStatic: true });
     let ground_rect = new PIXI.Graphics();
     ground_rect.beginFill(0xFFFFFF);
-    ground_rect.drawRect(0, 380, 810, 60);
+    ground_rect.drawRect(0, 380 - 60/2, 600, 60);
     ground_rect.endFill();
     let pika = new Player(resources.pika.texture);
     app.stage.addChild(pika.sprite);

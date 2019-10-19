@@ -5,22 +5,24 @@ import key from './key';
 
 export default class Player {
     constructor(texture) {
-        let pikachu_main_body = Matter.Bodies.rectangle(0, 0, 50, 50);
-        this.groundSensor = Matter.Bodies.rectangle(0, 46, 50, 6, {
+        let pikachu_main_body = Matter.Bodies.rectangle(0, 0, 50, 60);
+        this.groundSensor = Matter.Bodies.rectangle(0, 25, 50, 20, {
             sleepThreshold: Infinity,
             isSensor: true,
         });
 
         this.body = Matter.Body.create({
             parts: [pikachu_main_body, this.groundSensor],
-            friction: 0.01,
-            frictionAir: 0.01,
-            restitution: 0
+            inertia: Infinity,
+            friction: 0.002,
+            frictionAir: 0.002,
+            restitution: 0,
         });
 
         Matter.Body.setPosition(this.body, Matter.Vector.create(200, 100));
 
         this.sprite = new PIXI.Sprite(texture);
+        this.sprite.anchor.set(0.5);
         this.sprite.height = 50;
         this.sprite.width = 50;
 
@@ -37,7 +39,7 @@ export default class Player {
         }
 
         if (keyboard.isPressed(key.W) && this.onGround) {
-            this.body.force.y = -0.01 * dt;
+            this.body.force.y = -0.055 * dt;
         }
 
         this.update_position();
@@ -46,5 +48,6 @@ export default class Player {
     update_position() {
         this.sprite.x = this.body.position.x;
         this.sprite.y = this.body.position.y;
+        this.sprite.rotation = this.body.angle;
     }
 }
