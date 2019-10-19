@@ -20,8 +20,8 @@ import keyboard from './src/events/keyboard';
 
 const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
-    width: 1600,
-    height: 1600
+    width: 1700,
+    height: 1700
 });
 
 var engine = Matter.Engine.create();
@@ -42,8 +42,8 @@ function setup(loader, resources) {
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60 * dt);
         update(dt, state);
-        app.stage.x = lerp(app.stage.x, app.renderer.width/2 - state.player.sprite.x, 0.1 * dt);
-        app.stage.y = lerp(app.stage.y, app.renderer.height/2 - state.player.sprite.y, 0.1 * dt);
+        // app.stage.x = lerp(app.stage.x, app.renderer.width/2 - state.player.sprite.x, 0.1 * dt);
+        // app.stage.y = lerp(app.stage.y, app.renderer.height/2 - state.player.sprite.y, 0.1 * dt);
     });
 
     load_level(level1);
@@ -74,34 +74,48 @@ function load_level(level) {
     app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
     const atlas = PIXI.BaseTexture.from('tileset');
 
-    // render background layer
-    for (let i = 0; i < level.layers[1].data.length; i++) {
-        let data = level.layers[1].data;
+    console.log(level);
+    for (let j = 0; j < level.layers.length; j++) {
 
-        let extracted_data = get_flipping_and_id(data[i]);
-        let id = extracted_data.global_id;
+        if (level.layers[j].name === "Game Objects") {
+            continue;
+        }
 
-        const line = i % level.width;
-        const row = Math.floor(i / level.width);
-        const col = i % level.height;
+        for (let i = 0; i < level.layers[j].data.length; i++) {
+            let data = level.layers[1].data;
+            if (data[i] === 0) {
+                continue;
+            }
+            let extracted_data = get_flipping_and_id(data[i]);
+            let atlas_id = extracted_data.global_id - 1;
 
-        let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(row, col, 16, 16));
-        let current_sprite = new PIXI.Sprite(current_texture);
+            const atlas_row = Math.floor(atlas_id / level.width);
+            const atlas_col = atlas_id % level.height;
 
-        // console.log('line', line);
-        // console.log('row', row);
-        // console.log('col', col);
-        // console.log('pos x', canvas_position_x);
-        // console.log('pos y', canvas_position_y);
+            let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(atlas_row, atlas_col, 16, 16));
+            let current_sprite = new PIXI.Sprite(current_texture);
 
-        const canvas_position_x = (i * 16) % (level.width * 16);
-        const canvas_position_y = (i % 16) * 16;
+            const canvas_position_x = (i * 16) % (level.width * 16);
+            const canvas_position_y = Math.floor(i / 100) * 16;
 
-        current_sprite.position.x = canvas_position_x;
-        current_sprite.position.y = canvas_position_y;
+            current_sprite.position.x = canvas_position_x;
+            current_sprite.position.y = canvas_position_y;
 
-        app.stage.addChild(current_sprite);
+            app.stage.addChild(current_sprite);
+        }
     }
+    let first_sprite = new PIXI.Graphics();
+    first_sprite.beginFill(0xFF0000);
+    first_sprite.drawRect(0, 0, 16, 16);
+    first_sprite.endFill();
+
+    app.stage.addChild(first_sprite);
+    let last_sprite = new PIXI.Graphics();
+    last_sprite.beginFill(0xFF0000);
+    last_sprite.drawRect(1600, 1600, 16, 16);
+    last_sprite.endFill();
+
+    app.stage.addChild(last_sprite);
 }
 
 
