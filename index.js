@@ -4,7 +4,7 @@ import level1 from './levels/level1.json';
 import lerp from 'lerp';
 import {load_level} from './src/map';
 import { TILE_ATLAS, loadAnimation } from "./src/animations.js";
-import { CRTFilter } from 'pixi-filters';
+import * as pixi_filters from 'pixi-filters';
 import decomp from 'poly-decomp';
 window.decomp = decomp;
 
@@ -41,7 +41,7 @@ PIXI.Loader.shared
     .load(setup);
 
 window.addEventListener("resize", function() {
-  app.renderer.resize(window.innerWidth, window.innerHeight);
+    app.renderer.resize(window.innerWidth, window.innerHeight);
 });
 
 function setup(loader, resources) {
@@ -50,18 +50,18 @@ function setup(loader, resources) {
     collisions(engine, state);
 
     app.stage.scale = {x: 4, y: 4};
-    app.stage.filters = [new CRTFilter({
-        'curvature': 7.4,
-        'lineWidth': 2.0,
-        'lineContrast': 0.3,
-        'noise': 0.2,
-        'noiseSize': 2,
-        'vignetting': 0.5,
-        'vignettingAlpha': 1.0,
-        'vignettingBlur': 0.3,
-        'time': 0.5,
-    })];
-    app.stage.filters[0].filterArea = app.screen;
+    app.stage.filters = [
+        new pixi_filters.CRTFilter({
+            'curvature': 3,
+            'lineWidth': 5.0,
+            'lineContrast': 0.05,
+            'noise': 0.2,
+            'noiseSize': 0.1,
+            'vignetting': 0.3,
+            'vignettingAlpha': 1.0,
+            'vignettingBlur': 0.3,
+        }),
+    ];
 
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
