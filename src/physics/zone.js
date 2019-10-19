@@ -16,7 +16,6 @@ export default class PhysicsZone {
         for (let body of Object.values(this.containedBodies)) {
             if (this.type === 'antigravity') {
                 body.parent.force.y -= 0.005 * dt;
-                console.log(body.parent.force.y);
             }
         }
     }
@@ -25,7 +24,6 @@ export default class PhysicsZone {
         if (this.type === 'slowmotion') {
             collidingBody.parent.timeScale = 0.5;
         }
-        console.log('enter', collidingBody.id);
         this.containedBodies[collidingBody.id] = collidingBody;
     }
 
@@ -34,6 +32,5 @@ export default class PhysicsZone {
             collidingBody.parent.timeScale = 1;
         }
         delete this.containedBodies[collidingBody.id];
-        console.log('exit', collidingBody.label);
     }
 }
