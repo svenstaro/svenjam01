@@ -34,8 +34,6 @@ function setup(loader, resources) {
         app.stage.x = app.renderer.width/2 - state.player.sprite.x;
         app.stage.y = app.renderer.height/2 - state.player.sprite.y;
     });
-
-    console.log(level1);
 }
 
 function create_entities(resources) {

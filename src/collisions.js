@@ -7,7 +7,6 @@ function updatePlayerGroundStatus(event, player, status) {
         } else if (pair.bodyB === player.groundSensor) {
             player.onGround = status;
         }
-        console.log(player.onGround);
     }
 }
 
