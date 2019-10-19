@@ -39,7 +39,10 @@ export function getGameObjects(level) {
 
 
 export function load_level(level) {
-    app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
+    const bg_tex = PIXI.Texture.from('background');
+    let bg_tilingsprite = new PIXI.TilingSprite(bg_tex, app.screen.width, app.screen.height);
+    app.stage.addChildAt(bg_tilingsprite, 0);
+
     const atlas = PIXI.BaseTexture.from('tileset');
     const atlas_width = 32
     const atlas_height = 32

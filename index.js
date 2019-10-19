@@ -37,6 +37,7 @@ document.body.appendChild(app.view);
 
 PIXI.Loader.shared
     .add('tileset', require("./img/0x72_16x16RobotTileset.v1.png"))
+    .add('background', require("./img/background.png"))
     .load(setup);
 
 window.addEventListener("resize", function() {
@@ -50,9 +51,17 @@ function setup(loader, resources) {
 
     app.stage.scale = {x: 4, y: 4};
     app.stage.filters = [new CRTFilter({
-        'vignetting' : 0.5,
-        'noise': 0.2
+        'curvature': 7.4,
+        'lineWidth': 2.0,
+        'lineContrast': 0.3,
+        'noise': 0.2,
+        'noiseSize': 2,
+        'vignetting': 0.5,
+        'vignettingAlpha': 1.0,
+        'vignettingBlur': 0.3,
+        'time': 0.5,
     })];
+    app.stage.filters[0].filterArea = app.screen;
 
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
