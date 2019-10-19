@@ -85,7 +85,6 @@ export default class Player {
             const textures = tileIdsPerFrame.map(ids => {
                 const thisTexture = texture.clone()
                 thisTexture.frame = getRectForIds(ids, 1, 2)
-                console.log(animationType, thisTexture.frame)
                 thisTexture.updateUvs()
                 return thisTexture
             })

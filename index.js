@@ -86,7 +86,6 @@ function load_level(level) {
     const atlas_width = 32
     const atlas_height = 32
 
-    console.log(level);
     for (let j = 0; j < level.layers.length; j++) {
 
         if (level.layers[j].name === "Game Objects") {
