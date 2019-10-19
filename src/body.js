@@ -1,4 +1,4 @@
-export default class Entity {
+export default class Body {
     constructor(sprite, body) {
         this.sprite = sprite;
         this.body = body;

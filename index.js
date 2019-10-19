@@ -1,66 +1,58 @@
 import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
-import update from './src/update.js';
-import Entity from './src/entity.js';
-import tmx from 'tmx-parser';
+import level1 from './levels/level1.json';
 
-const app = new PIXI.Application({ backgroundColor: 0x1099bb });
-var engine = Matter.Engine.create();
-const Engine = Matter.Engine
-const World = Matter.World;
-document.body.appendChild(app.view);
+import update from './src/update';
+import Body from './src/body';
+import Player from './src/player';
+import keyboard from './src/keyboard';
+import collisions from './src/collisions';
 
-// Load static files into app.
-const staticFiles = {
-  "levels/level1.xml": require("./levels/level1.xml"),
-  "levels/industrial.v2.xml": require("./levels/industrial.v2.xml"),
-  "levels/character.xml": require("./levels/character.xml"),
-};
-tmx.readFile = (filename, callback) => {
-  if (typeof staticFiles[filename] === "undefined") {
-    console.error(`Missing resource ${filename}`);
-    throw `Missing resource ${filename}`;
-  }
-  fetch(staticFiles[filename]).then(response => {
-    const result = response.text().then(text => {
-      callback(undefined, text);
-    });
-  });
-};
-
-tmx.parseFile("levels/level1.xml", (err, map) => {
-  if (err) throw err;
-  console.log(map);
+const app = new PIXI.Application({
+    backgroundColor: 0x1099bb,
+    width: 600,
+    height: 600
 });
 
+var engine = Matter.Engine.create();
+const Engine = Matter.Engine;
+const World = Matter.World;
+document.body.appendChild(app.view);
 
 PIXI.Loader.shared
     .add('pika', require('./img/pikachu.png'))
     .load(setup);
 
 function setup(loader, resources) {
+    keyboard.init();
     let state = create_entities(resources);
+    collisions(engine, state);
 
     app.ticker.add((dt) => {
-        Engine.update(engine, dt);
+        Engine.update(engine, 1000/60 * dt);
         update(dt, state);
+        app.stage.x = app.renderer.width/2 - state.player.sprite.x;
+        app.stage.y = app.renderer.height/2 - state.player.sprite.y;
     });
+
+    load_level(level1);
 }
 
-
 function create_entities(resources) {
-    var Bodies = Matter.Bodies;
+    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, { isStatic: true });
+    let ground_rect = new PIXI.Graphics();
+    ground_rect.beginFill(0xFFFFFF);
+    ground_rect.drawRect(0, 380 - 60/2, 600, 60);
+    ground_rect.endFill();
+    let pika = new Player(resources.pika.texture);
+    app.stage.addChild(pika.sprite);
+    app.stage.addChild(ground_rect);
+    World.add(engine.world, [pika.body, ground_body]);
 
-    var ground_body = Bodies.rectangle(400, 380, 810, 60, { isStatic: true });
-    var pikachu_body = Bodies.rectangle(400, 200, 80, 80);
+    return {player: pika};
+}
 
-    World.add(engine.world, [pikachu_body, ground_body]);
-
-    const bunny_sprite = new PIXI.Sprite(resources.pika.texture);
-    bunny_sprite.anchor.set(0.5);
-    app.stage.addChild(bunny_sprite);
-
-    let bunny = new Entity(bunny_sprite, pikachu_body);
-
-    return {bunny};
+function load_level(level) {
+    console.log(level);
+    app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
 }

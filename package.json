@@ -9,14 +9,11 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
-    "typescript": "^3.6.4"
+    "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
-    "levels": "^0.0.7",
     "matter-js": "^0.14.2",
     "pixi.js": "^5.1.5",
-    "tmx-parser": "^1.5.0",
     "vigur": "^0.1.1"
   }
 }
