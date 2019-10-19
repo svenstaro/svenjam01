@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
 import level1 from './levels/level1.json';
 import lerp from 'lerp';
-import { loadAnimation } from "./src/animations.js";
+import { TILE_ATLAS, loadAnimation } from "./src/animations.js";
 
 import Box from './src/entities/box';
 
@@ -91,16 +91,15 @@ function load_level(level) {
             let atlas_id = extracted_data.global_id - 1;
 
             let current_sprite = undefined;
-            if (TILESET_ATLAS[atlas_id].animation) {
-                current_sprite = loadAnimation([atlas_id]);
-            } else {
+            // if (TILE_ATLAS[atlas_id] && TILE_ATLAS[atlas_id].animation) {
+            //     current_sprite = loadAnimation([atlas_id]);
+            // } else {
                 const atlas_row = Math.floor(atlas_id / atlas_width);
                 const atlas_col = atlas_id % atlas_width
                 const rect = new PIXI.Rectangle(atlas_col*16, atlas_row*16, 16, 16);
                 const current_texture = new PIXI.Texture(atlas, rect);
                 current_sprite = new PIXI.Sprite(current_texture);
-            }
-
+            // }
 
             const canvas_position_x = (i * 16) % (level.width * 16);
             const canvas_position_y = Math.floor(i / 100) * 16;

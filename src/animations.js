@@ -6,7 +6,7 @@ const TILE_WIDTH = 16;
 const TILE_HEIGHT = 16;
 const TILES_PER_ROW = 512 / TILE_WIDTH;
 
-const TILE_ATLAS = tileset.tiles.reduce(
+export const TILE_ATLAS = tileset.tiles.reduce(
     (accum, tileDef) => ({ ...accum, [tileDef.id]: tileDef }),
     {}
 );

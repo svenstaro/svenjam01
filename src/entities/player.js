@@ -50,9 +50,10 @@ export default class Player {
             this.sprite.stop();
             this.stage.removeChild(this.sprite);
         }
+        this.current_sprite_name = animationName;
         this.sprite = this.sprites[animationName];
-        this.stage.addChild(this.sprite);
         this.sprite.play();
+        this.stage.addChild(this.sprite);
     }
 
     update(dt) {
@@ -80,12 +81,13 @@ export default class Player {
         }
 
         // Set the animation.
-        if (this.onGround && this.body.velocity.x !== 0) {
-            this.setSprite("walking");
-        }
-        if (this.onGround && this.body.velocity.x === 0) {
-            this.setSprite("idle");
-        }
+        // if (this.onGround && this.body.velocity.x !== 0) {
+        //     this.setSprite("walking");
+        // }
+        // if (this.onGround && this.body.velocity.x === 0) {
+        //     this.setSprite("idle");
+        // }
+        // this.setSprite("walking");
 
         this.update_position();
     }
