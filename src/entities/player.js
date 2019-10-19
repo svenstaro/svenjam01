@@ -14,16 +14,16 @@ export default class Player {
         this.onGround = false;
 
         // Physics.
-        let player_body = Matter.Bodies.rectangle(0, 0, 16, 32);
-        this.groundSensor = Matter.Bodies.rectangle(0, 16, 12, 32, {
+        let player_body = Matter.Bodies.circle(0, 0, 8);
+        this.groundSensor = Matter.Bodies.rectangle(0, 6, 12, 6, {
             sleepThreshold: Infinity,
             isSensor: true,
         });
         this.body = Matter.Body.create({
             parts: [player_body, this.groundSensor],
             inertia: Infinity,
-            friction: 0.001,
-            frictionAir: 0.0005,
+            friction: 0.004,
+            frictionAir: 0.001,
             restitution: 0,
             label: "player",
         });
@@ -60,22 +60,22 @@ export default class Player {
 
     update(dt) {
         if (keyboard.isPressed(key.A)) {
-            this.body.force.x = -0.0005 * dt;
+            this.body.force.x = -0.0002 * dt;
         } else if (keyboard.isPressed(key.D)) {
-            this.body.force.x = 0.0005 * dt;
+            this.body.force.x = 0.0002 * dt;
         } else {
             if (
                 this.body.velocity.y == 0 &&
                 this.body.velocity.x != 0 &&
                 Math.abs(this.body.velocity.x) > 0.7
             ) {
-                this.body.force.x =
-                    Math.sign(this.body.velocity.x) * -0.01 * dt;
+                // this.body.force.x =
+                    // Math.sign(this.body.velocity.x) * -0.01 * dt;
             }
         }
 
         if (keyboard.isPressed(key.W) && this.onGround) {
-            this.body.force.y = -0.015 * dt;
+            this.body.force.y = -0.005 * dt;
         }
 
         if (this.body.position.y > 2000) {
@@ -97,7 +97,7 @@ export default class Player {
     update_position() {
         const body = this.body;
         this.sprite.x = body.position.x;
-        this.sprite.y = body.position.y;
+        this.sprite.y = body.position.y - 2;
         this.sprite.rotation = body.angle;
     }
 
