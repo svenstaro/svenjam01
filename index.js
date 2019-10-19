@@ -9,6 +9,7 @@ import Body from './src/body';
 import Player from './src/player';
 import keyboard from './src/keyboard';
 import collisions from './src/collisions';
+import {getSpawn} from './src/map';
 
 const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
@@ -50,7 +51,7 @@ function create_entities(resources) {
     ground_rect.drawRect(0, 380 - 60/2, 600, 60);
     ground_rect.endFill();
 
-    let pika = new Player(resources.pika.texture);
+    let pika = new Player(resources.pika.texture, getSpawn(level1));
     app.stage.addChild(pika.sprite);
     app.stage.addChild(ground_rect);
 

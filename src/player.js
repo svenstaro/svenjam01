@@ -4,7 +4,7 @@ import keyboard from './keyboard';
 import key from './key';
 
 export default class Player {
-    constructor(texture) {
+    constructor(texture, spawn) {
         let player_body = Matter.Bodies.rectangle(0, 0, 50, 60);
         this.groundSensor = Matter.Bodies.rectangle(0, 25, 50, 20, {
             sleepThreshold: Infinity,
@@ -20,6 +20,7 @@ export default class Player {
             label: 'player',
         });
 
+        this.spawn = spawn;
         this.reset();
 
         this.sprite = new PIXI.Sprite(texture);
@@ -40,7 +41,7 @@ export default class Player {
                 this.body.velocity.x != 0 &&
                 Math.abs(this.body.velocity.x) > 0.7
             ) {
-                this.body.force.x = Math.sign(this.body.velocity.x) * -0.01 * dt
+                this.body.force.x = Math.sign(this.body.velocity.x) * -0.01 * dt;
             }
         }
 
@@ -62,7 +63,7 @@ export default class Player {
     }
 
     reset() {
-        Matter.Body.setPosition(this.body, Matter.Vector.create(200, 100));
+        Matter.Body.setPosition(this.body, this.spawn);
         Matter.Body.setVelocity(this.body, Matter.Vector.create(0, 0));
     }
 }
