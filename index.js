@@ -13,7 +13,6 @@ import update from './src/update';
 
 // Physics
 import Body from './src/physics/body';
-import PhysicsZone from './src/physics/zone';
 import collisions from './src/physics/collisions';
 
 // Entities
@@ -62,18 +61,16 @@ function create_entities(resources) {
     // Rendering is inside player.
     window.player = new Player(app.stage, getSpawn(level1));
 
-    let zone = new PhysicsZone(600, 250, 500, 600, 'antigravity');
-
     let gameObjects = getGameObjects(level1);
     let gameObjectBodies = Object.values(gameObjects).map(obj => obj.body);
     Object.values(gameObjects).forEach(obj => app.stage.addChild(obj.sprite));
 
     World.add(engine.world, [
-        player.body, zone.body,
+        player.body,
         ...gameObjectBodies
     ]);
 
-    return new Set([player, zone, ...gameObjects]);
+    return new Set([player, ...gameObjects]);
 }
 
 function load_level(level) {
