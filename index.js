@@ -26,7 +26,7 @@ function setup(loader, resources) {
     let state = create_entities(resources);
 
     app.ticker.add((dt) => {
-        Engine.update(engine, dt);
+        Engine.update(engine, 1000/60);
         update(dt, state);
     });
 }

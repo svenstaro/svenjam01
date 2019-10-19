@@ -13,17 +13,14 @@ export default class Player {
 
         this.body = Matter.Body.create({
             parts: [pikachu_main_body, this.groundSensor],
-            friction: 0.001,
-            frictionAir: 0.001,
+            friction: 0.01,
+            frictionAir: 0.01,
             restitution: 0
         });
 
-        Matter.Body.setMass(pikachu_main_body,500);
-
-        console.log(pikachu_main_body);
+        Matter.Body.setPosition(this.body, Matter.Vector.create(200, 100));
 
         this.sprite = new PIXI.Sprite(texture);
-        this.sprite.anchor.set(0.5);
         this.sprite.height = 50;
         this.sprite.width = 50;
 
@@ -32,13 +29,15 @@ export default class Player {
 
     update(dt) {
         if (keyboard.isPressed(key.A)) {
-            this.body.force.x = -0.1 * dt;
+            this.body.force.x = -0.01 * dt;
         } else if (keyboard.isPressed(key.D)) {
-            this.body.force.x = 0.1 * dt;
-        } else if (keyboard.isPressed(key.W) && this.onGround) {
-            this.body.force.y = -0.5 * dt;
-        } else {
+            this.body.force.x = 0.01 * dt;
+        }  else {
             this.body.force.x = 0;
+        }
+
+        if (keyboard.isPressed(key.W) && this.onGround) {
+            this.body.force.y = -0.01 * dt;
         }
 
         this.update_position();
