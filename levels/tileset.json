@@ -312,6 +312,18 @@
             }
         }, 
         {
+         "id":10,
+         "type":"pedestal_button_orange_up"
+        }, 
+        {
+         "id":11,
+         "type":"pedestal_button_magenta_up"
+        }, 
+        {
+         "id":12,
+         "type":"pedestal_button_yellow_up"
+        }, 
+        {
          "id":32,
          "objectgroup":
             {
@@ -573,6 +585,18 @@
             }
         }, 
         {
+         "id":42,
+         "type":"pedestal_button_orange_down"
+        }, 
+        {
+         "id":43,
+         "type":"pedestal_button_magenta_down"
+        }, 
+        {
+         "id":44,
+         "type":"pedestal_button_yellow_down"
+        }, 
+        {
          "id":64,
          "objectgroup":
             {
@@ -824,7 +848,11 @@
         }, 
         {
          "id":74,
-         "type":"pedestal_button_up"
+         "type":"pedestal_button_blue_up"
+        }, 
+        {
+         "id":75,
+         "type":"pedestal_button_green_up"
         }, 
         {
          "id":96,
@@ -1078,7 +1106,11 @@
         }, 
         {
          "id":106,
-         "type":"pedestal_button_down"
+         "type":"pedestal_button_blue_down"
+        }, 
+        {
+         "id":107,
+         "type":"pedestal_button_green_down"
         }, 
         {
          "id":128,
@@ -2342,7 +2374,8 @@
                  "duration":250,
                  "tileid":368
                 }],
-         "id":364
+         "id":364,
+         "type":"bot1_idle_top"
         }, 
         {
          "animation":[
@@ -2362,7 +2395,8 @@
                  "duration":250,
                  "tileid":400
                 }],
-         "id":396
+         "id":396,
+         "type":"bot1_idle_bot"
         }, 
         {
          "id":423,
@@ -2387,7 +2421,8 @@
              "visible":true,
              "x":0,
              "y":0
-            }
+            },
+         "type":"box_black"
         }, 
         {
          "id":424,
@@ -2412,7 +2447,8 @@
              "visible":true,
              "x":0,
              "y":0
-            }
+            },
+         "type":"box_orange"
         }, 
         {
          "id":425,
@@ -2437,7 +2473,200 @@
              "visible":true,
              "x":0,
              "y":0
-            }
+            },
+         "type":"box_blue"
+        }, 
+        {
+         "id":455,
+         "type":"box_yellow"
+        }, 
+        {
+         "id":456,
+         "type":"box_green"
+        }, 
+        {
+         "id":457,
+         "type":"box_magenta"
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":483
+                }, 
+                {
+                 "duration":50,
+                 "tileid":484
+                }, 
+                {
+                 "duration":50,
+                 "tileid":485
+                }],
+         "id":486
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":480
+                }, 
+                {
+                 "duration":50,
+                 "tileid":481
+                }, 
+                {
+                 "duration":50,
+                 "tileid":482
+                }],
+         "id":487
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":250,
+                 "tileid":493
+                }, 
+                {
+                 "duration":250,
+                 "tileid":494
+                }, 
+                {
+                 "duration":250,
+                 "tileid":495
+                }, 
+                {
+                 "duration":250,
+                 "tileid":496
+                }],
+         "id":492,
+         "type":"player_idle_top"
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":498
+                }, 
+                {
+                 "duration":50,
+                 "tileid":499
+                }, 
+                {
+                 "duration":50,
+                 "tileid":500
+                }, 
+                {
+                 "duration":50,
+                 "tileid":501
+                }, 
+                {
+                 "duration":50,
+                 "tileid":502
+                }, 
+                {
+                 "duration":50,
+                 "tileid":503
+                }, 
+                {
+                 "duration":50,
+                 "tileid":504
+                }, 
+                {
+                 "duration":50,
+                 "tileid":505
+                }],
+         "id":497,
+         "type":"player_run_top"
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":515
+                }, 
+                {
+                 "duration":50,
+                 "tileid":516
+                }, 
+                {
+                 "duration":50,
+                 "tileid":517
+                }],
+         "id":518
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":513
+                }, 
+                {
+                 "duration":50,
+                 "tileid":512
+                }, 
+                {
+                 "duration":50,
+                 "tileid":514
+                }],
+         "id":519
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":250,
+                 "tileid":525
+                }, 
+                {
+                 "duration":250,
+                 "tileid":526
+                }, 
+                {
+                 "duration":250,
+                 "tileid":527
+                }, 
+                {
+                 "duration":250,
+                 "tileid":528
+                }],
+         "id":524,
+         "type":"player_idle_bot"
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":530
+                }, 
+                {
+                 "duration":50,
+                 "tileid":531
+                }, 
+                {
+                 "duration":50,
+                 "tileid":532
+                }, 
+                {
+                 "duration":50,
+                 "tileid":533
+                }, 
+                {
+                 "duration":50,
+                 "tileid":534
+                }, 
+                {
+                 "duration":50,
+                 "tileid":535
+                }, 
+                {
+                 "duration":50,
+                 "tileid":536
+                }, 
+                {
+                 "duration":50,
+                 "tileid":537
+                }],
+         "id":529,
+         "type":"player_run_bot"
         }],
  "tilewidth":16,
  "type":"tileset",
