@@ -32,6 +32,7 @@ const World = Matter.World;
 document.body.appendChild(app.view);
 
 PIXI.Loader.shared
+    .add('pika', require('./img/pikachu.png'))
     .add('tileset', require("./img/0x72_16x16RobotTileset.v1.png"))
     .load(setup);
 
@@ -102,20 +103,7 @@ function load_level(level) {
             app.stage.addChild(current_sprite);
         }
     }
-    let first_sprite = new PIXI.Graphics();
-    first_sprite.beginFill(0xFF0000);
-    first_sprite.drawRect(0, 0, 16, 16);
-    first_sprite.endFill();
-
-    app.stage.addChild(first_sprite);
-    let last_sprite = new PIXI.Graphics();
-    last_sprite.beginFill(0xFF0000);
-    last_sprite.drawRect(1600, 1600, 16, 16);
-    last_sprite.endFill();
-
-    app.stage.addChild(last_sprite);
 }
-
 
 function get_flipping_and_id(id) {
     let horizontal_bit = 0b10000000000000000000000000000000;
