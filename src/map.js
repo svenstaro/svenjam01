@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
 import Box from './entities/box';
 import {TILES_MAP} from "./tileset_helper";
+import {loadAnimation} from "./animations";
 import PhysicsZone from './physics/zone';
 
 const World = Matter.World;
@@ -55,19 +56,26 @@ export function load_level(level) {
             if (layer.data[i] === 0) {
                 continue;
             }
-            let extracted_data = get_flipping_and_id(layer.data[i]);
+            const extracted_data = get_flipping_and_id(layer.data[i]);
+            const { global_id } = extracted_data;
             // Calculate atlas_id (global_id - tileset_id)
-            let atlas_id = extracted_data.global_id - 1;
+            const atlas_id = global_id - 1;
 
-            // Calculate position in tileset
-            const atlas_row = Math.floor(parseFloat(atlas_id) / parseFloat(atlas_width));
-            const atlas_col = atlas_id % atlas_width
+            // Calculate position in tileset.
+            let current_sprite = undefined;
+            if (TILES_MAP[atlas_id] && TILES_MAP[atlas_id].animation) {
+                current_sprite = loadAnimation([atlas_id], 1, 1);
+                current_sprite.play();
+            } else {
+                const atlas_row = Math.floor(atlas_id / atlas_width);
+                const atlas_col = atlas_id % atlas_width
 
-            // Create textures
-            let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(atlas_col*16, atlas_row*16, 16, 16));
-            let current_sprite = new PIXI.Sprite(current_texture);
+                // Create textures.
+                const current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(atlas_col*16, atlas_row*16, 16, 16));
+                current_sprite = new PIXI.Sprite(current_texture);
+            }
 
-            // Calculation and set positions
+            // Calculation and set positions.
             const canvas_position_x = (i * 16) % (level.width * 16);
             const canvas_position_y = Math.floor(i / 100) * 16;
             current_sprite.position.x = canvas_position_x;

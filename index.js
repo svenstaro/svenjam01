@@ -54,7 +54,6 @@ function setup(loader, resources) {
         'noise': 0.2
     })];
 
-
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
         update(dt, state);
