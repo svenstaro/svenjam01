@@ -14,8 +14,8 @@ export default class Player {
         this.onGround = false;
 
         // Physics.
-        let player_body = Matter.Bodies.rectangle(0, 0, 50, 60);
-        this.groundSensor = Matter.Bodies.rectangle(0, 25, 50, 20, {
+        let player_body = Matter.Bodies.rectangle(0, 0, 16, 32);
+        this.groundSensor = Matter.Bodies.rectangle(0, 16, 12, 32, {
             sleepThreshold: Infinity,
             isSensor: true,
         });
@@ -50,16 +50,19 @@ export default class Player {
             this.sprite.stop();
             this.stage.removeChild(this.sprite);
         }
+        this.current_sprite_name = animationName;
         this.sprite = this.sprites[animationName];
         this.stage.addChild(this.sprite);
+        this.sprite.anchor.set(0.5);
         this.sprite.play();
+        this.stage.addChild(this.sprite);
     }
 
     update(dt) {
         if (keyboard.isPressed(key.A)) {
-            this.body.force.x = -0.005 * dt;
+            this.body.force.x = -0.0005 * dt;
         } else if (keyboard.isPressed(key.D)) {
-            this.body.force.x = 0.005 * dt;
+            this.body.force.x = 0.0005 * dt;
         } else {
             if (
                 this.body.velocity.y == 0 &&
@@ -72,7 +75,7 @@ export default class Player {
         }
 
         if (keyboard.isPressed(key.W) && this.onGround) {
-            this.body.force.y = -0.055 * dt;
+            this.body.force.y = -0.015 * dt;
         }
 
         if (this.body.position.y > 2000) {
@@ -80,12 +83,13 @@ export default class Player {
         }
 
         // Set the animation.
-        if (this.onGround && this.body.velocity.x !== 0) {
-            this.setSprite("walking");
-        }
-        if (this.onGround && this.body.velocity.x === 0) {
-            this.setSprite("idle");
-        }
+        // if (this.onGround && this.body.velocity.x !== 0) {
+        //     this.setSprite("walking");
+        // }
+        // if (this.onGround && this.body.velocity.x === 0) {
+        //     this.setSprite("idle");
+        // }
+        // this.setSprite("walking");
 
         this.update_position();
     }

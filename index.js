@@ -3,6 +3,9 @@ import * as Matter from 'matter-js';
 import level1 from './levels/level1.json';
 import lerp from 'lerp';
 import {load_level} from './src/map';
+import { TILE_ATLAS, loadAnimation } from "./src/animations.js";
+
+import Box from './src/entities/box';
 
 // Base stuff
 import {getSpawn, getGameObjects} from './src/map';
