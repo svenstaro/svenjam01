@@ -15,16 +15,16 @@ export default class Player {
     // Physics.
     let pikachu_main_body = Matter.Bodies.rectangle(0, 0, 50, 60);
     this.groundSensor = Matter.Bodies.rectangle(0, 25, 50, 20, {
-        sleepThreshold: Infinity,
-        isSensor: true,
+      sleepThreshold: Infinity,
+      isSensor: true,
     });
     this.body = Matter.Body.create({
-        parts: [pikachu_main_body, this.groundSensor],
-        inertia: Infinity,
-        friction: 0.001,
-        frictionAir: 0.0005,
-        restitution: 0,
-        label: 'player',
+      parts: [pikachu_main_body, this.groundSensor],
+      inertia: Infinity,
+      friction: 0.001,
+      frictionAir: 1.0005,
+      restitution: 0,
+      label: 'player',
     });
 
     // Graphics.
