@@ -1,8 +1,9 @@
 import * as Matter from 'matter-js';
+import * as PIXI from 'pixi.js';
 
 export default class PhysicsZone {
     constructor(x, y, width, height, type) {
-        this.body = Matter.Bodies.rectangle(x, y, width, height, {
+        this.body = Matter.Bodies.rectangle(x - width/2, y - height/2, width, height, {
             sleepThreshold: Infinity,
             isSensor: true,
             isStatic: true,
@@ -10,6 +11,9 @@ export default class PhysicsZone {
         this.body.physicsZone = this;
         this.type = type;
         this.containedBodies = {};
+        this.sprite = new PIXI.Graphics();
+        this.sprite.beginFill(0xFFFF88, 0.5);
+        this.sprite.drawRect(x - width/2, y - height/2, width, height);
     }
 
     update(dt) {

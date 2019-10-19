@@ -1,15 +1,9 @@
 import * as PIXI from "pixi.js";
-
-import tileset from "../levels/tileset.json";
+import {TILES_MAP} from "./tileset_helper";
 
 const TILE_WIDTH = 16;
 const TILE_HEIGHT = 16;
 const TILES_PER_ROW = 512 / TILE_WIDTH;
-
-export const TILE_ATLAS = tileset.tiles.reduce(
-    (accum, tileDef) => ({ ...accum, [tileDef.id]: tileDef }),
-    {}
-);
 
 function getRectForId(id) {
     const row = Math.floor(id / TILES_PER_ROW);
@@ -38,7 +32,7 @@ function getRectForIds(ids, num_tiles_x, num_tiles_y) {
 
 export function loadAnimation(animationIds) {
     const tileIdsPerAnimation = animationIds.map(id =>
-        TILE_ATLAS[id].animation.map(tileDef => tileDef.tileid)
+        TILES_MAP[id].animation.map(tileDef => tileDef.tileid)
     );
     const tileIdsPerFrame = [];
     tileIdsPerAnimation.forEach(ids =>
