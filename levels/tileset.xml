@@ -1,16 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.2" tiledversion="1.2.5" name="industrial.v2" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
  <image source="../img/industrial.v2.png" width="512" height="512"/>
+ <tile id="38">
+  <objectgroup draworder="index">
+   <object id="1" x="0" y="0" width="16" height="2"/>
+  </objectgroup>
+ </tile>
+ <tile id="39">
+  <objectgroup draworder="index">
+   <object id="1" x="0" y="0" width="16" height="2"/>
+  </objectgroup>
+ </tile>
+ <tile id="40">
+  <objectgroup draworder="index">
+   <object id="1" x="0" y="0" width="16" height="2"/>
+  </objectgroup>
+ </tile>
+ <tile id="41">
+  <objectgroup draworder="index">
+   <object id="1" x="7.57079e-06" y="0" width="16" height="2"/>
+  </objectgroup>
+ </tile>
+ <tile id="42">
+  <objectgroup draworder="index">
+   <object id="2" x="0" y="0" width="16" height="2"/>
+  </objectgroup>
+ </tile>
+ <tile id="43">
+  <objectgroup draworder="index">
+   <object id="1" x="-1.77636e-15" y="0" width="16" height="2"/>
+  </objectgroup>
+ </tile>
+ <tile id="163">
+  <animation>
+   <frame tileid="195" duration="100"/>
+   <frame tileid="194" duration="100"/>
+   <frame tileid="193" duration="100"/>
+   <frame tileid="192" duration="100"/>
+   <frame tileid="193" duration="100"/>
+   <frame tileid="194" duration="100"/>
+   <frame tileid="195" duration="100"/>
+  </animation>
+ </tile>
  <wangsets>
   <wangset name="Grass Ground" tile="41">
    <wangedgecolor name="" color="#ff0000" tile="-1" probability="1"/>
    <wangedgecolor name="" color="#00ff00" tile="-1" probability="1"/>
-   <wangtile tileid="38" wangid="0x1010201"/>
-   <wangtile tileid="39" wangid="0x2010201"/>
-   <wangtile tileid="40" wangid="0x2010201"/>
-   <wangtile tileid="41" wangid="0x2010201"/>
-   <wangtile tileid="42" wangid="0x2010201"/>
-   <wangtile tileid="43" wangid="0x2010101"/>
   </wangset>
  </wangsets>
 </tileset>
