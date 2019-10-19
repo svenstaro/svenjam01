@@ -1,5 +1,6 @@
 import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
+import level1 from './levels/level1.json';
 
 import update from './src/update';
 import Body from './src/body';
@@ -29,6 +30,8 @@ function setup(loader, resources) {
         Engine.update(engine, dt);
         update(dt, state);
     });
+
+    console.log(level1);
 }
 
 function create_entities(resources) {
