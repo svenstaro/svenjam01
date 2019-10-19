@@ -5,6 +5,7 @@ import update from './src/update';
 import Body from './src/body';
 import Player from './src/player';
 import keyboard from './src/keyboard';
+import collisions from './src/collisions';
 
 const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
@@ -24,6 +25,7 @@ PIXI.Loader.shared
 function setup(loader, resources) {
     keyboard.init();
     let state = create_entities(resources);
+    collisions(engine, state);
 
     app.ticker.add((dt) => {
         Engine.update(engine, 1000/60);
