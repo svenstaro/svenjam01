@@ -34,6 +34,8 @@ function setup(loader, resources) {
         app.stage.x = app.renderer.width/2 - state.player.sprite.x;
         app.stage.y = app.renderer.height/2 - state.player.sprite.y;
     });
+
+    load_level(level1);
 }
 
 function create_entities(resources) {
@@ -48,4 +50,9 @@ function create_entities(resources) {
     World.add(engine.world, [pika.body, ground_body]);
 
     return {player: pika};
+}
+
+function load_level(level) {
+    console.log(level);
+    app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
 }
