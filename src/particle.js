@@ -1,8 +1,9 @@
 import * as PIXI from 'pixi.js';
 
 export default function dispatchParticles(player) {
-   console.log("dispatching particle function");
+   let pos = player.body.position;
+   console.log("dispatching particle function at ", pos.x, pos.y);
    let particle = new PIXI.Text("oof"); 
-   particle.position.set(player.body.x, player.body.y);
+   particle.position.set(pos.x, pos.y);
    app.stage.addChild(particle);
 }
