@@ -15,7 +15,7 @@ export default class Player {
 
         // Physics.
         let player_body = Matter.Bodies.circle(0, 0, 8);
-        this.groundSensor = Matter.Bodies.rectangle(0, 6, 12, 6, {
+        this.groundSensor = Matter.Bodies.circle(0, 6, 6, {
             sleepThreshold: Infinity,
             isSensor: true,
         });
