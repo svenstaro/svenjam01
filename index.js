@@ -20,9 +20,10 @@ import Player from './src/entities/player';
 // Event handling
 import keyboard from './src/events/keyboard';
 
+PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 window.app = new PIXI.Application({
     width: 800,
-    height: 600
+    height: 600,
 });
 
 window.engine = Matter.Engine.create();
@@ -39,11 +40,13 @@ function setup(loader, resources) {
     let state = create_entities(resources);
     collisions(engine, state);
 
+    app.stage.scale = {x: 4, y: 4};
+
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
         update(dt, state);
-        app.stage.x = lerp(app.stage.x, app.renderer.width/2 - player.sprite.x, 0.1 * dt);
-        app.stage.y = lerp(app.stage.y, app.renderer.height/2 - player.sprite.y, 0.1 * dt);
+        app.stage.x = lerp(app.stage.x, app.renderer.width / 2 - player.sprite.x * 4, 0.1 * dt);
+        app.stage.y = lerp(app.stage.y, app.renderer.height / 2 - player.sprite.y * 4, 0.1 * dt);
     });
 
     load_level(level1);
