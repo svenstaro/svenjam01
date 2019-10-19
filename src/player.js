@@ -29,9 +29,9 @@ export default class Player {
 
     update(dt) {
         if (keyboard.isPressed(key.A)) {
-            this.body.force.x = -0.01 * dt;
+            this.body.force.x = -0.005 * dt;
         } else if (keyboard.isPressed(key.D)) {
-            this.body.force.x = 0.01 * dt;
+            this.body.force.x = 0.005 * dt;
         }  else {
             this.body.force.x = 0;
         }
