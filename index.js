@@ -23,8 +23,8 @@ import keyboard from './src/events/keyboard';
 
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 window.app = new PIXI.Application({
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
 });
 
 window.engine = Matter.Engine.create();
