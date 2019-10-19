@@ -4,6 +4,7 @@ import level1 from './levels/level1.json';
 import lerp from 'lerp';
 import {load_level} from './src/map';
 import { TILE_ATLAS, loadAnimation } from "./src/animations.js";
+import { CRTFilter } from 'pixi-filters';
 
 import Box from './src/entities/box';
 
@@ -45,6 +46,11 @@ function setup(loader, resources) {
     collisions(engine, state);
 
     app.stage.scale = {x: 4, y: 4};
+    app.stage.filters = [new CRTFilter({
+        'vignetting' : 0.5,
+        'noise': 0.2
+    })];
+
 
     app.ticker.add((dt) => {
         Engine.update(engine, 1000 / 60);
