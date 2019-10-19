@@ -4,7 +4,6 @@ import level1 from './levels/level1.json';
 
 import PhysicsZone from './src/physics_zone';
 import update from './src/update';
-import Body from './src/body';
 import Player from './src/player';
 import keyboard from './src/keyboard';
 import collisions from './src/collisions';
@@ -22,6 +21,7 @@ document.body.appendChild(app.view);
 
 PIXI.Loader.shared
     .add('pika', require('./img/pikachu.png'))
+    .add('tileset', require('./img/0x72_16x16RobotTileset.v1.png'))
     .load(setup);
 
 function setup(loader, resources) {
@@ -49,8 +49,8 @@ function create_entities(resources) {
     ground_rect.drawRect(0, 380 - 60/2, 600, 60);
     ground_rect.endFill();
 
-    let pika = new Player(resources.pika.texture);
-    app.stage.addChild(pika.sprite);
+    console.log(resources.tileset);
+    let pika = new Player(app.stage, resources.tileset.texture);
     app.stage.addChild(ground_rect);
 
     let zone = new PhysicsZone(600, 250, 500, 600, 'antigravity');
