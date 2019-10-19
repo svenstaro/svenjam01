@@ -21,7 +21,6 @@ import Player from './src/entities/player';
 import keyboard from './src/events/keyboard';
 
 window.app = new PIXI.Application({
-    backgroundColor: 0x1099bb,
     width: 800,
     height: 600
 });
