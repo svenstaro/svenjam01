@@ -10,8 +10,8 @@ import collisions from './src/collisions';
 
 const app = new PIXI.Application({
     backgroundColor: 0x1099bb,
-    width: 600,
-    height: 600
+    width: 1600,
+    height: 1600
 });
 
 var engine = Matter.Engine.create();
@@ -30,20 +30,20 @@ function setup(loader, resources) {
     collisions(engine, state);
 
     app.ticker.add((dt) => {
-        Engine.update(engine, 1000/60 * dt);
+        Engine.update(engine, 1000 / 60 * dt);
         update(dt, state);
-        app.stage.x = app.renderer.width/2 - state.player.sprite.x;
-        app.stage.y = app.renderer.height/2 - state.player.sprite.y;
+        app.stage.x = app.renderer.width / 2 - state.player.sprite.x;
+        app.stage.y = app.renderer.height / 2 - state.player.sprite.y;
     });
 
     load_level(level1);
 }
 
 function create_entities(resources) {
-    let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, { isStatic: true });
+    let ground_body = Matter.Bodies.rectangle(app.renderer.width / 2, 380, 600, 60, {isStatic: true});
     let ground_rect = new PIXI.Graphics();
     ground_rect.beginFill(0xFFFFFF);
-    ground_rect.drawRect(0, 380 - 60/2, 600, 60);
+    ground_rect.drawRect(0, 380 - 60 / 2, 600, 60);
     ground_rect.endFill();
     let pika = new Player(resources.pika.texture);
     app.stage.addChild(pika.sprite);
@@ -58,12 +58,25 @@ function load_level(level) {
     app.renderer.backgroundColor = Number.parseInt(level.backgroundcolor.replace('#', '0x'));
     const atlas = PIXI.BaseTexture.from('tileset');
     // render background layer
-    for (let i = 0; i < level.layers[1].data; i++) {
-	let line = i % level.width;
-	let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(Math.ceil(float(data[i]) / 100.0), data[i] % 100, 16, 16));
-	let current_sprite = new PIXI.Sprite(current_texture);
-	current_sprite.position.x = i * 16;
-	current_sprite.position.y = (i % 16) * 16;
+    for (let i = 0; i < level.layers[1].data.length; i++) {
+        let data = level.layers[1].data;
+        if (data[i]) {
+            console.log(i);
+        }
+        let line = i % level.width;
+        let row = Math.ceil(parseFloat(data[i]) / 100.0);
+        let col = data[i] % 100;
+        let current_texture = new PIXI.Texture(atlas, new PIXI.Rectangle(row, col, 16, 16));
+        let current_sprite = new PIXI.Sprite(current_texture);
+        // console.log('line', line);
+        // console.log('row', row);
+        // console.log('col', col);
+        // console.log('pos x', canvas_position_x);
+        // console.log('pos y', canvas_position_y);
+        const canvas_position_x = (i * 16)%(100*16);
+        const canvas_position_y = (i % 16) * 16;
+        current_sprite.position.x = canvas_position_x;
+        current_sprite.position.y = canvas_position_y;
 
         app.stage.addChild(current_sprite);
     }
