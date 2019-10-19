@@ -2438,6 +2438,70 @@
              "x":0,
              "y":0
             }
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":483
+                }, 
+                {
+                 "duration":50,
+                 "tileid":484
+                }, 
+                {
+                 "duration":50,
+                 "tileid":485
+                }],
+         "id":486
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":480
+                }, 
+                {
+                 "duration":50,
+                 "tileid":481
+                }, 
+                {
+                 "duration":50,
+                 "tileid":482
+                }],
+         "id":487
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":515
+                }, 
+                {
+                 "duration":50,
+                 "tileid":516
+                }, 
+                {
+                 "duration":50,
+                 "tileid":517
+                }],
+         "id":518
+        }, 
+        {
+         "animation":[
+                {
+                 "duration":50,
+                 "tileid":513
+                }, 
+                {
+                 "duration":50,
+                 "tileid":512
+                }, 
+                {
+                 "duration":50,
+                 "tileid":514
+                }],
+         "id":519
         }],
  "tilewidth":16,
  "type":"tileset",
