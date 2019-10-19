@@ -54,9 +54,6 @@ function setup(loader, resources) {
 }
 
 function create_entities(resources) {
-    // Register the tileset for animations.
-    setAnimationTilesetTexture(resources.tileset.texture);
-
     // Rendering is inside player.
     window.player = new Player(app.stage, getSpawn(level1));
 

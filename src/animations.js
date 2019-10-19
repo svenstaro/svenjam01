@@ -2,11 +2,6 @@ import * as PIXI from "pixi.js";
 
 import tileset from "../levels/tileset.json";
 
-let tilesetTexture = undefined;
-export function setAnimationTilesetTexture(newTilesetTexture) {
-    tilesetTexture = newTilesetTexture;
-}
-
 const TILE_WIDTH = 16;
 const TILE_HEIGHT = 16;
 const TILES_PER_ROW = 512 / TILE_WIDTH;
@@ -56,7 +51,7 @@ export function loadAnimation(animationIds) {
         )
     );
     const textures = tileIdsPerFrame.map(ids => {
-        const thisTexture = tilesetTexture.clone();
+        const thisTexture = PIXI.Texture.from('tileset');
         thisTexture.frame = getRectForIds(ids, 1, 2);
         thisTexture.updateUvs();
         return thisTexture;
