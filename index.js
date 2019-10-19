@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import * as Matter from 'matter-js';
 import level1 from './levels/level1.json';
 import lerp from 'lerp';
+import { setAnimationTilesetTexture } from "./src/animations.js";
 
 import Box from './src/entities/box';
 
@@ -52,6 +53,9 @@ function setup(loader, resources) {
 }
 
 function create_entities(resources) {
+    // Register the tileset for animations.
+    setAnimationTilesetTexture(resources.tileset.texture);
+
     let ground_body = Matter.Bodies.rectangle(app.renderer.width/2, 380, 600, 60, {
         isStatic: true,
         label: 'ground',
@@ -62,7 +66,7 @@ function create_entities(resources) {
     ground_rect.endFill();
 
     // Rendering is inside player.
-    window.player = new Player(app.stage, resources.tileset.texture, getSpawn(level1));
+    window.player = new Player(app.stage, getSpawn(level1));
 
     app.stage.addChild(ground_rect);
 
