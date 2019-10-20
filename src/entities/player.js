@@ -1,6 +1,7 @@
 import * as Matter from "matter-js";
 import * as PIXI from "pixi.js";
 
+import dispatchParticles from "../particle.js";
 import tileset from "../../levels/tileset.json";
 import keyboard from "../events/keyboard";
 import key from "../events/key";
@@ -15,16 +16,13 @@ export default class Player {
 
         // Physics.
         let player_body = Matter.Bodies.circle(0, 0, 8);
-        this.jumpSensor = Matter.Bodies.rect(0, 6, 10, 5, {
+        this.hoverSensor = Matter.Bodies.rectangle(0, 13, 12, 13, {
             sleepThreshold: Infinity,
-            isSensor: true
-        });
-        this.hoverSensor = Matter.Bodies.rect(0, 12, 6, 5, {
-            sleepThreshold: Infinity,
-            isSensor: true
+            isSensor: true,
+            density: 0,
         });
         this.body = Matter.Body.create({
-            parts: [player_body, this.jumpSensor, this.hoverSensor],
+            parts: [player_body, this.hoverSensor],
             inertia: Infinity,
             friction: 0.004,
             frictionAir: 0.001,
@@ -72,8 +70,13 @@ export default class Player {
             this.body.force.x = 0.0002 * dt;
         }
 
-        if (keyboard.isPressed(key.W) && this.onGround) {
-            this.body.force.y = -0.005 * dt;
+        if (keyboard.isPressed(key.W) && this.onGround && !this.jumped) {
+            this.jumped = true;
+            this.body.force.y = -0.002 * dt;
+        }
+
+        if (this.onGround) {
+            this.body.force.y -= 0.0003;
         }
 
         if (this.body.position.y > 2000) {
@@ -103,5 +106,33 @@ export default class Player {
         this.setSprite("idle");
         Matter.Body.setPosition(this.body, this.spawn);
         Matter.Body.setVelocity(this.body, Matter.Vector.create(0, 0));
+    }
+
+    onCollisionEnter(event) {
+        let oldOnGround = this.onGround;
+        if (this.isGroundCollision(event)) {
+            this.onGround = true;
+            this.jumped = false;
+
+            if (!oldOnGround) {
+                dispatchParticles(this);
+            }
+        }
+    }
+
+    onCollisionExit(event) {
+        if (this.isGroundCollision(event)) {
+            this.onGround = false;
+        }
+    }
+
+    isGroundCollision(event) {
+        for (let pair of event.pairs) {
+            if (pair.bodyA === this.hoverSensor
+                || pair.bodyB === this.hoverSensor) {
+                return true;
+            }
+        }
+        return false;
     }
 }

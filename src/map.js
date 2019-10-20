@@ -161,12 +161,12 @@ function create_static_body(atlas_id, flip_info, pos_x, pos_y) {
         } else {
             let vertices = object.polygon;
             if (flip_info.vertical || flip_info.diagonal) {
-                for (vertex of vertices) {
+                for (let vertex of vertices) {
                     vertex.x = -vertex.x - 16;
                 }
             }
             if (flip_info.horizontal || flip_info.diagonal) {
-                for (vertex of vertices) {
+                for (let vertex of vertices) {
                     vertex.y = -vertex.y - 16;
                 }
             }

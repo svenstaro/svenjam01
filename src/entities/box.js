@@ -19,7 +19,7 @@ export default class Box {
         this.sprite.y = this.body.position.y;
         this.sprite.rotation = this.body.angle;
 
-        if (this.body.position.y > 3000) {
+        if (this.body.position.y > 2000) {
             Matter.World.remove(engine.world, this.body);
             app.stage.removeChild(this.sprite);
             this.destroyed = true;
