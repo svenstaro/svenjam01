@@ -15,7 +15,7 @@ export default class Player {
         this.onGround = false;
 
         // Physics.
-        let player_body = Matter.Bodies.circle(0, 0, 8);
+        let player_body = Matter.Bodies.rectangle(0, 0, 8, 10);
         this.hoverSensor = Matter.Bodies.rectangle(0, 13, 12, 13, {
             sleepThreshold: Infinity,
             isSensor: true,
@@ -23,10 +23,10 @@ export default class Player {
         });
         this.body = Matter.Body.create({
             parts: [player_body, this.hoverSensor],
-            inertia: Infinity,
             friction: 0.004,
             frictionAir: 0.001,
             restitution: 0,
+            mass: 0.2,
             label: "player"
         });
 
@@ -75,9 +75,9 @@ export default class Player {
             this.body.force.y = -0.002 * dt;
         }
 
-        if (this.onGround) {
-            this.body.force.y -= 0.0003;
-        }
+        // if (this.onGround) {
+        //     this.body.force.y -= 0.0003;
+        // }
 
         if (this.body.position.y > 2000) {
             this.reset();
@@ -97,8 +97,8 @@ export default class Player {
 
     update_position() {
         const body = this.body;
-        this.sprite.x = body.position.x + 5;
-        this.sprite.y = body.position.y - 2;
+        this.sprite.x = body.parts[1].position.x;
+        this.sprite.y = body.parts[1].position.y;
         this.sprite.rotation = body.angle;
     }
 
