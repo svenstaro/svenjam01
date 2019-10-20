@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js';
+import * as PIXI from "pixi.js";
 
-export default function dispatchParticles(player) {
-}
+export default function dispatchParticles(player) {}

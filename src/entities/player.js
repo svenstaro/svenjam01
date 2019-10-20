@@ -15,12 +15,16 @@ export default class Player {
 
     // Physics.
     let player_body = Matter.Bodies.circle(0, 0, 8);
-    this.groundSensor = Matter.Bodies.circle(0, 6, 6, {
+    this.jumpSensor = Matter.Bodies.rect(0, 6, 10, 5, {
+      sleepThreshold: Infinity,
+      isSensor: true
+    });
+    this.hoverSensor = Matter.Bodies.rect(0, 12, 6, 5, {
       sleepThreshold: Infinity,
       isSensor: true
     });
     this.body = Matter.Body.create({
-      parts: [player_body, this.groundSensor],
+      parts: [player_body, this.jumpSensor],
       inertia: Infinity,
       friction: 0.004,
       frictionAir: 0.001,
@@ -66,15 +70,6 @@ export default class Player {
       this.body.force.x = -0.0002 * dt;
     } else if (keyboard.isPressed(key.D)) {
       this.body.force.x = 0.0002 * dt;
-    } else {
-      if (
-        this.body.velocity.y == 0 &&
-        this.body.velocity.x != 0 &&
-        Math.abs(this.body.velocity.x) > 0.7
-      ) {
-        // this.body.force.x =
-        // Math.sign(this.body.velocity.x) * -0.01 * dt;
-      }
     }
 
     if (keyboard.isPressed(key.W) && this.onGround) {
